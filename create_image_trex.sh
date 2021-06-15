@@ -61,13 +61,6 @@ rm ${IMAGE_DIR}/etc/hostname
 rc=$?; if [ $rc -ne 0 ]; then echo "Cannot remove the hostname" ; exit $rc ; fi
 
 #######################################################
-# CREATE THE ROOTFS
-#######################################################
-echo "CREATE THE ROOTFS"
-tar -cvzf trex_rootfs.tar.gz -C ${IMAGE_DIR} .
-rc=$?; if [ $rc -ne 0 ]; then echo "Cannot create the rootfs" ; exit $rc ; fi
-
-#######################################################
 # CREATE THE METADATA
 #######################################################
 echo "CREATE THE METADATA"
@@ -80,8 +73,14 @@ description: "TRex image"
 os: "ubuntu"
 release: "20.04"
 EOF
-tar -cvzf trex_metadata.tar.gz metadata.yaml
 rc=$?; if [ $rc -ne 0 ]; then echo "Cannot create the metadata" ; exit $rc ; fi
+
+#######################################################
+# CREATE THE ROOTFS
+#######################################################
+echo "CREATE THE ROOTFS"
+sudo tar -cvzf trex.tar.gz ${IMAGE_DIR} metadata.yaml
+rc=$?; if [ $rc -ne 0 ]; then echo "Cannot create the rootfs" ; exit $rc ; fi
 
 echo "DONE"
 
