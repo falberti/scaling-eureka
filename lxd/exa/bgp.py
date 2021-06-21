@@ -2,8 +2,6 @@
 
 import sys
 import time
-import struct
-import socket
 
 messages = []
 messages.append('announce route 66.185.112.0/24 next-hop self as-path [174,2914,42]')
@@ -19,6 +17,7 @@ messages.append('announce route 211.13.0.0/17 next-hop self as-path [1299 2518 2
 for message in messages:
     sys.stdout.write(message + '\n')
     sys.stdout.flush()
+    time.sleep(1)
 
 while True:
     time.sleep(1)
