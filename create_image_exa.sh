@@ -45,14 +45,20 @@ rc=$?; if [ $rc -ne 0 ]; then echo "Cannot install packages" ; exit $rc ; fi
 # EXABGP
 #######################################################
 echo "INSTALLING EXABGP"
-sudo chroot ${IMAGE_DIR} /bin/bash -c "pip3 install exabgp"
+sudo chroot ${IMAGE_DIR} /bin/bash -c "apt install python3-exabgp"
+rc=$?; if [ $rc -ne 0 ]; then echo "Cannot install EXABGP #1" ; exit $rc ; fi
 sudo chroot ${IMAGE_DIR} /bin/bash -c "mkdir -p /usr/local/var/run/exabgp"
+rc=$?; if [ $rc -ne 0 ]; then echo "Cannot install EXABGP #2" ; exit $rc ; fi
 sudo chroot ${IMAGE_DIR} /bin/bash -c "mkfifo /usr/local/var/run/exabgp/exabgp.{in,out}"
+rc=$?; if [ $rc -ne 0 ]; then echo "Cannot install EXABGP #3" ; exit $rc ; fi
 sudo chroot ${IMAGE_DIR} /bin/bash -c "chmod 600 /usr/local/var/run/exabgp/exabgp.{in,out}"
+rc=$?; if [ $rc -ne 0 ]; then echo "Cannot install EXABGP #4" ; exit $rc ; fi
 sudo chroot ${IMAGE_DIR} /bin/bash -c "mkdir -p /usr/local/etc/exabgp/"
+rc=$?; if [ $rc -ne 0 ]; then echo "Cannot install EXABGP #5" ; exit $rc ; fi
 sudo chroot ${IMAGE_DIR} /bin/bash -c "exabgp --fi > /usr/local/etc/exabgp/exabgp.env"
+rc=$?; if [ $rc -ne 0 ]; then echo "Cannot install EXABGP #6" ; exit $rc ; fi
 sudo chroot ${IMAGE_DIR} /bin/bash -c "sed -i 's/nobody/root/g' /usr/local/etc/exabgp/exabgp.env"
-rc=$?; if [ $rc -ne 0 ]; then echo "Cannot install EXABGP" ; exit $rc ; fi
+rc=$?; if [ $rc -ne 0 ]; then echo "Cannot install EXABGP #7" ; exit $rc ; fi
 
 # Add config files
 sudo cp lxd/exa/exabgp.conf ${IMAGE_DIR}/root/exabgp.conf
