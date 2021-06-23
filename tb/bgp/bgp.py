@@ -85,8 +85,10 @@ try:
     sys.exit(1)
 except pylxd.exceptions.NotFound as e:
     pass
+with open('frr.tar.gz', 'rb') as f:
+    image_data = f.read()
 try:
-    image = lxd_client.images.create_from_url("http://212.237.23.234:8000/frr")
+    image = lxd_client.images.create(image_data, public=False, wait=True)
     image.add_alias(NAME, "FRR image")
 except pylxd.exceptions.LXDAPIException as e:
     print(e)
