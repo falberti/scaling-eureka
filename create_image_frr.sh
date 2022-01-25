@@ -38,6 +38,11 @@ sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb-src http://security.ubuntu.com
 sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb http://security.ubuntu.com/ubuntu focal-security multiverse\" >> /etc/apt/sources.list"
 sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb-src http://security.ubuntu.com/ubuntu focal-security multiverse\" >> /etc/apt/sources.list"
 
+sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"Acquire::https {\" >> /etc/apt/apt.conf.d/90sslverify"
+sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"Verify-Peer \"false\";\" >> /etc/apt/apt.conf.d/90sslverify"
+sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"Verify-Host \"false\";\" >> /etc/apt/apt.conf.d/90sslverify"
+sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"}\" >> /etc/apt/apt.conf.d/90sslverify"
+
 sudo chroot ${IMAGE_DIR} /bin/bash -c "sudo apt update && sudo apt install -yq curl gnupg tcpdump ifupdown"
 rc=$?; if [ $rc -ne 0 ]; then echo "Cannot install curl" ; exit $rc ; fi
 
