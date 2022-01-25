@@ -6,7 +6,6 @@ import random
 import string
 import urllib
 import os
-import docker
 
 if len(sys.argv) != 2:
     print("Usage:",sys.argv[0],"<test-bed name>")
@@ -20,25 +19,21 @@ if os.geteuid() != 0:
 # ID of the tb
 NAME = sys.argv[1]
  
-# Create a lxd_client and a docker_client
+# Create a lxd_client
 lxd_client = pylxd.Client()
-docker_client = docker.from_env()
  
 # Delete all containers matching the name
 # LXD
 for cont in lxd_client.containers.all():
     if NAME in cont.name:
-        print("Stopping container {}".format(cont.name))
-        cont.stop(wait=True)
+        try:
+            print("Stopping container {}".format(cont.name))
+            cont.stop(wait=True)
+        except pylxd.exceptions.LXDAPIException as e:
+            print(e)
+            pass
         print("Deleting container {}".format(cont.name))
         cont.delete(wait=True)
-# Docker
-for cont in docker_client.containers.list():
-    if NAME in cont.name:
-        print("Stopping container {}".format(cont.name))
-        cont.stop()
-print("Deleting all stopped docker containers")
-docker_client.containers.prune()
 
 # Delete the image we created for this TB
 for image in lxd_client.images.all():
