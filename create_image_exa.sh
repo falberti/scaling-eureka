@@ -79,7 +79,7 @@ properties:
 architecture: "x86_64"
 description: "EXABGP image"
 os: "ubuntu"
-release: "18.04"
+release: "20.04"
 EOF
 rc=$?; if [ $rc -ne 0 ]; then echo "Cannot create the metadata" ; exit $rc ; fi
 
