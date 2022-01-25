@@ -13,30 +13,30 @@ sudo rm -rf ${IMAGE_DIR}
 
 # Create folder
 mkdir ${IMAGE_DIR}
-sudo debootstrap --arch=amd64 bionic ${IMAGE_DIR}
+sudo debootstrap --arch=amd64 focal ${IMAGE_DIR}
 rc=$?; if [ $rc -ne 0 ]; then echo "Cannot debootstrap" ; exit $rc ; fi
 
 # Set-up apt repositories
-sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb http://archive.ubuntu.com/ubuntu bionic main restricted\" > /etc/apt/sources.list"
-sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb-src http://archive.ubuntu.com/ubuntu bionic main restricted\" >> /etc/apt/sources.list"
-sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb http://archive.ubuntu.com/ubuntu bionic-updates main restricted\" >> /etc/apt/sources.list"
-sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb-src http://archive.ubuntu.com/ubuntu bionic-updates main restricted\" >> /etc/apt/sources.list"
-sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb http://archive.ubuntu.com/ubuntu bionic universe\" >> /etc/apt/sources.list"
-sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb-src http://archive.ubuntu.com/ubuntu bionic universe\" >> /etc/apt/sources.list"
-sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb http://archive.ubuntu.com/ubuntu bionic-updates universe\" >> /etc/apt/sources.list"
-sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb-src http://archive.ubuntu.com/ubuntu bionic-updates universe\" >> /etc/apt/sources.list"
-sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb http://archive.ubuntu.com/ubuntu bionic multiverse\" >> /etc/apt/sources.list"
-sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb-src http://archive.ubuntu.com/ubuntu bionic multiverse\" >> /etc/apt/sources.list"
-sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb http://archive.ubuntu.com/ubuntu bionic-updates multiverse\" >> /etc/apt/sources.list"
-sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb-src http://archive.ubuntu.com/ubuntu bionic-updates multiverse\" >> /etc/apt/sources.list"
-sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb http://archive.ubuntu.com/ubuntu bionic-backports main restricted universe multiverse\" >> /etc/apt/sources.list"
-sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb-src http://archive.ubuntu.com/ubuntu bionic-backports main restricted universe multiverse\" >> /etc/apt/sources.list"
-sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb http://security.ubuntu.com/ubuntu bionic-security main restricted\" >> /etc/apt/sources.list"
-sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb-src http://security.ubuntu.com/ubuntu bionic-security main restricted\" >> /etc/apt/sources.list"
-sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb http://security.ubuntu.com/ubuntu bionic-security universe\" >> /etc/apt/sources.list"
-sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb-src http://security.ubuntu.com/ubuntu bionic-security universe\" >> /etc/apt/sources.list"
-sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb http://security.ubuntu.com/ubuntu bionic-security multiverse\" >> /etc/apt/sources.list"
-sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb-src http://security.ubuntu.com/ubuntu bionic-security multiverse\" >> /etc/apt/sources.list"
+sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb http://archive.ubuntu.com/ubuntu focal main restricted\" > /etc/apt/sources.list"
+sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb-src http://archive.ubuntu.com/ubuntu focal main restricted\" >> /etc/apt/sources.list"
+sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb http://archive.ubuntu.com/ubuntu focal-updates main restricted\" >> /etc/apt/sources.list"
+sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb-src http://archive.ubuntu.com/ubuntu focal-updates main restricted\" >> /etc/apt/sources.list"
+sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb http://archive.ubuntu.com/ubuntu focal universe\" >> /etc/apt/sources.list"
+sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb-src http://archive.ubuntu.com/ubuntu focal universe\" >> /etc/apt/sources.list"
+sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb http://archive.ubuntu.com/ubuntu focal-updates universe\" >> /etc/apt/sources.list"
+sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb-src http://archive.ubuntu.com/ubuntu focal-updates universe\" >> /etc/apt/sources.list"
+sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb http://archive.ubuntu.com/ubuntu focal multiverse\" >> /etc/apt/sources.list"
+sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb-src http://archive.ubuntu.com/ubuntu focal multiverse\" >> /etc/apt/sources.list"
+sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb http://archive.ubuntu.com/ubuntu focal-updates multiverse\" >> /etc/apt/sources.list"
+sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb-src http://archive.ubuntu.com/ubuntu focal-updates multiverse\" >> /etc/apt/sources.list"
+sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb http://archive.ubuntu.com/ubuntu focal-backports main restricted universe multiverse\" >> /etc/apt/sources.list"
+sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb-src http://archive.ubuntu.com/ubuntu focal-backports main restricted universe multiverse\" >> /etc/apt/sources.list"
+sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb http://security.ubuntu.com/ubuntu focal-security main restricted\" >> /etc/apt/sources.list"
+sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb-src http://security.ubuntu.com/ubuntu focal-security main restricted\" >> /etc/apt/sources.list"
+sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb http://security.ubuntu.com/ubuntu focal-security universe\" >> /etc/apt/sources.list"
+sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb-src http://security.ubuntu.com/ubuntu focal-security universe\" >> /etc/apt/sources.list"
+sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb http://security.ubuntu.com/ubuntu focal-security multiverse\" >> /etc/apt/sources.list"
+sudo chroot ${IMAGE_DIR} /bin/bash -c "echo \"deb-src http://security.ubuntu.com/ubuntu focal-security multiverse\" >> /etc/apt/sources.list"
 
 sudo chroot ${IMAGE_DIR} /bin/bash -c "sudo apt update && sudo apt install -yq curl gnupg tcpdump ifupdown python3-pip vim screen"
 rc=$?; if [ $rc -ne 0 ]; then echo "Cannot install packages" ; exit $rc ; fi
