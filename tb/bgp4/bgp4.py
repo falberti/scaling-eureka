@@ -88,8 +88,10 @@ except pylxd.exceptions.NotFound as e:
     pass
 with open('frr.tar.gz', 'rb') as f:
     image_data = f.read()
+with open('frr_metadata.tar.gz', 'rb') as f:
+    metadata = f.read()
 try:
-    image = lxd_client.images.create(image_data, public=False, wait=True)
+    image = lxd_client.images.create(image_data, metadata=metadata, public=False, wait=True)
     image.add_alias(NAME, "TRex image")
 except pylxd.exceptions.LXDAPIException as e:
     print(e)
