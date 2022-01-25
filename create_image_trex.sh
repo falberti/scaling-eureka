@@ -79,8 +79,10 @@ rc=$?; if [ $rc -ne 0 ]; then echo "Cannot create the metadata" ; exit $rc ; fi
 # CREATE THE ROOTFS
 #######################################################
 echo "CREATE THE ROOTFS"
-sudo tar -cvzf trex.tar.gz ${IMAGE_DIR} metadata.yaml
+sudo tar -cvzf trex.tar.gz ${IMAGE_DIR}
 rc=$?; if [ $rc -ne 0 ]; then echo "Cannot create the rootfs" ; exit $rc ; fi
+sudo tar -cvzf trex_metadata.tar.gz metadata.yaml
+rc=$?; if [ $rc -ne 0 ]; then echo "Cannot create the tar metadata" ; exit $rc ; fi
 
 echo "DONE"
 
